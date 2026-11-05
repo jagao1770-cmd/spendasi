@@ -14,9 +14,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* ==========================================
-           1. CSS VARIABLES & BASE STYLES
-           ========================================== */
         :root {
             --primary-navy: #0A2540;
             --primary-blue: #1E3A8A;
@@ -66,13 +63,11 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: var(--bg-body); }
         ::-webkit-scrollbar-thumb { background: var(--support-blue); border-radius: 5px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--primary-blue); }
 
-        /* General Utility Classes */
         .container {
             width: 90%;
             max-width: 1200px;
@@ -149,9 +144,6 @@
             border-color: #FFF;
         }
 
-        /* ==========================================
-           2. LOADING SCREEN
-           ========================================== */
         #loader {
             position: fixed;
             inset: 0;
@@ -176,9 +168,6 @@
 
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* ==========================================
-           3. TOP BAR & NAVBAR
-           ========================================== */
         .top-bar {
             background: var(--primary-navy);
             color: rgba(255,255,255,0.8);
@@ -307,9 +296,6 @@
             color: var(--text-main);
         }
 
-        /* ==========================================
-           4. HERO SECTION
-           ========================================== */
         .hero {
             position: relative;
             min-height: 85vh;
@@ -359,9 +345,6 @@
             justify-content: center;
         }
 
-        /* ==========================================
-           5. PROFIL SEKOLAH & BRILLIANT
-           ========================================== */
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -423,9 +406,6 @@
             color: var(--text-muted);
         }
 
-        /* ==========================================
-           6. STATISTIK SEKOLAH
-           ========================================== */
         .stats-section {
             background: linear-gradient(135deg, var(--primary-navy), var(--primary-blue));
             color: #FFF;
@@ -465,9 +445,6 @@
             color: rgba(255, 255, 255, 0.8);
         }
 
-        /* ==========================================
-           7. GURU & FASILITAS & CARDS
-           ========================================== */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -519,9 +496,6 @@
             color: var(--text-muted);
         }
 
-        /* ==========================================
-           8. GALERI LIGHTBOX
-           ========================================== */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -560,7 +534,6 @@
 
         .gallery-item:hover .gallery-overlay { opacity: 1; }
 
-        /* Lightbox Modal */
         .lightbox {
             position: fixed;
             inset: 0;
@@ -587,9 +560,6 @@
             cursor: pointer;
         }
 
-        /* ==========================================
-           9. KONTAK & FOOTER
-           ========================================== */
         .contact-wrap {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -626,9 +596,6 @@
             text-align: center;
         }
 
-        /* ==========================================
-           10. AI CHATBOT SPENDASI
-           ========================================== */
         .chat-toggle {
             position: fixed;
             bottom: 30px;
@@ -772,9 +739,6 @@
 
         .back-to-top.show { opacity: 1; visibility: visible; }
 
-        /* ==========================================
-           11. RESPONSIVE DESIGN
-           ========================================== */
         @media (max-width: 768px) {
             .hamburger { display: block; }
             .nav-links {
@@ -888,7 +852,6 @@
                 </div>
             </div>
 
-            <!-- SLOGAN BRILLIANT -->
             <div style="margin-top: 60px;">
                 <h3 style="text-align:center; margin-bottom:10px;">Slogan Sekolah: <span style="color:var(--accent-gold);">"We Are Brilliant!"</span></h3>
                 <div class="brilliant-grid">
@@ -1153,7 +1116,6 @@
                 </div>
 
                 <div>
-                    <!-- Google Maps Embed -->
                     <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.2735773199856!2d112.7063!3d-7.4462!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7e15e8b0d2387%3A0x6b63799cf5f764a7!2sSMP%20Negeri%202%20Sidoarjo!5e0!3m2!1sid!2sid!4v1700000000000" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
@@ -1222,18 +1184,14 @@
         <i class="fas fa-arrow-up"></i>
     </div>
 
-    <!-- ==========================================
-       12. JAVASCRIPT IMPLEMENTATION
-       ========================================== -->
+    <!-- JAVASCRIPT IMPLEMENTATION -->
     <script>
-        // 1. Loading Screen
         window.addEventListener('load', () => {
             const loader = document.getElementById('loader');
             loader.style.opacity = '0';
             setTimeout(() => { loader.style.display = 'none'; }, 500);
         });
 
-        // 2. Jam Digital Automatic
         function updateClock() {
             const now = new Date();
             const hours = String(now.getHours()).padStart(2, '0');
@@ -1244,7 +1202,6 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // 3. Theme Toggle (Dark Mode / Light Mode)
         const themeToggleBtn = document.getElementById('themeToggle');
         themeToggleBtn.addEventListener('click', () => {
             const currentTheme = document.documentElement.getAttribute('data-theme');
@@ -1257,14 +1214,12 @@
             }
         });
 
-        // 4. Mobile Navigation Menu Toggle
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('navLinks');
         hamburger.addEventListener('click', () => {
             navLinks.classList.toggle('active');
         });
 
-        // 5. Back to Top Button Logic
         const backToTopBtn = document.getElementById('backToTop');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 300) {
@@ -1278,7 +1233,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // 6. Search Guru
         function filterGuru() {
             const input = document.getElementById('searchGuru').value.toLowerCase();
             const cards = document.getElementsByClassName('guru-card');
@@ -1292,7 +1246,6 @@
             });
         }
 
-        // 7. Lightbox Functionality
         function openLightbox(src) {
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightboxImg');
@@ -1304,7 +1257,6 @@
             document.getElementById('lightbox').style.display = 'none';
         }
 
-        // 8. Count-Up Animation Statistics
         let animatedStats = false;
         window.addEventListener('scroll', () => {
             const statsSection = document.querySelector('.stats-section');
@@ -1332,7 +1284,6 @@
             }
         });
 
-        // 9. AI Chatbot SPENDASI Integration Logic
         function toggleChat() {
             const chatWin = document.getElementById('chatWindow');
             chatWin.style.display = (chatWin.style.display === 'flex') ? 'none' : 'flex';
@@ -1353,81 +1304,52 @@
             }
         }
 
+        // Integrasi Real ke Serverless Function Vercel (/api/chat)
         async function sendMessage() {
-    const inputField = document.getElementById('chatInput');
-    const userMsg = inputField.value.trim();
-    if (!userMsg) return;
+            const inputField = document.getElementById('chatInput');
+            const userMsg = inputField.value.trim();
+            if (!userMsg) return;
 
-    const chatBody = document.getElementById('chatBody');
+            const chatBody = document.getElementById('chatBody');
 
-    // 1. Tampilkan pesan dari pengguna
-    const userDiv = document.createElement('div');
-    userDiv.className = 'chat-msg user';
-    userDiv.textContent = userMsg;
-    chatBody.appendChild(userDiv);
-    inputField.value = '';
-    chatBody.scrollTop = chatBody.scrollHeight;
+            const userDiv = document.createElement('div');
+            userDiv.className = 'chat-msg user';
+            userDiv.textContent = userMsg;
+            chatBody.appendChild(userDiv);
 
-    // 2. Tampilkan indikator loading (sedang mengetik)
-    const botTyping = document.createElement('div');
-    botTyping.className = 'chat-msg bot';
-    botTyping.id = 'typingIndicator';
-    botTyping.innerHTML = '<i>SPENDASI AI sedang mengetik...</i>';
-    chatBody.appendChild(botTyping);
-    chatBody.scrollTop = chatBody.scrollHeight;
+            inputField.value = '';
+            chatBody.scrollTop = chatBody.scrollHeight;
 
-    try {
-        // 3. Panggil Serverless Function Vercel yang sudah terkoneksi dengan Gemini API
-        const response = await fetch('/api/chat', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: userMsg })
-        });
-        
-        const data = await response.json();
-        
-        // 4. Hapus indikator loading
-        document.getElementById('typingIndicator').remove();
-        
-        // 5. Tampilkan jawaban nyata dari Gemini AI
-        const botDiv = document.createElement('div');
-        botDiv.className = 'chat-msg bot';
-        botDiv.innerHTML = data.reply;
-        chatBody.appendChild(botDiv);
-        chatBody.scrollTop = chatBody.scrollHeight;
+            const botTyping = document.createElement('div');
+            botTyping.className = 'chat-msg bot';
+            botTyping.id = 'typingIndicator';
+            botTyping.innerHTML = '<i>SPENDASI AI sedang mengetik...</i>';
+            chatBody.appendChild(botTyping);
+            chatBody.scrollTop = chatBody.scrollHeight;
 
-    } catch (error) {
-        document.getElementById('typingIndicator').remove();
-        const errorDiv = document.createElement('div');
-        errorDiv.className = 'chat-msg bot';
-        errorDiv.textContent = "Maaf, terjadi kesalahan koneksi ke server AI.";
-        chatBody.appendChild(errorDiv);
-    }
-}
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: userMsg })
+                });
+                
+                const data = await response.json();
 
+                document.getElementById('typingIndicator').remove();
+                const botDiv = document.createElement('div');
+                botDiv.className = 'chat-msg bot';
+                botDiv.innerHTML = data.reply;
+                chatBody.appendChild(botDiv);
+                chatBody.scrollTop = chatBody.scrollHeight;
 
-        // Simulasi System Instruction & Knowledge Base Asisten Virtual
-        function simulateAIResponse(query) {
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    const q = query.toLowerCase();
-                    if (q.includes('lokasi') || q.includes('alamat') || q.includes('di mana')) {
-                        resolve("SMP Negeri 2 Sidoarjo berlokasi di Jalan Raya Ponti, Magersari, Kecamatan Sidoarjo, Kabupaten Sidoarjo, Jawa Timur.");
-                    } else if (q.includes('kepala sekolah') || q.includes('kepsek')) {
-                        resolve("Kepala SMP Negeri 2 Sidoarjo saat ini adalah Bapak Sukardi, S.Pd., M.Pd.");
-                    } else if (q.includes('slogan') || q.includes('brilliant') || q.includes('arti')) {
-                        resolve("Slogan sekolah adalah <strong>'We Are Brilliant!'</strong>. BRILLIANT merupakan akronim dari:<br>• <strong>B</strong>right (Cerdas)<br>• <strong>R</strong>eligious (Agamis)<br>• <strong>I</strong>ntelligent (Berbakat)<br>• <strong>L</strong>iterate (Terpelajar)<br>• <strong>L</strong>awful (Patuh)<br>• <strong>I</strong>ntegritas");
-                    } else if (q.includes('kontak') || q.includes('telepon') || q.includes('email')) {
-                        resolve("Anda dapat menghubungi pihak sekolah melalui Telepon: (031) 8941132 atau Email: sdasmpn2@gmail.com.");
-                    } else if (q.includes('fasilitas')) {
-                        resolve("SMPN 2 Sidoarjo memiliki berbagai fasilitas seperti Perpustakaan Digital, Lab Komputer, Lab IPA, Lapangan Olahraga Serbaguna, dan Ruang Kelas Berbasis Teknologi.");
-                    } else if (q.includes('visi') || q.includes('misi')) {
-                        resolve("Visi SMPN 2 Sidoarjo adalah 'Terwujudnya Lulusan yang Berkarakter, Unggul dalam Prestasi, Berwawasan Global, dan Berbudaya Lingkungan'.");
-                    } else {
-                        resolve("Terima kasih atas pertanyaannya. Untuk informasi mendalam mengenai hal tersebut yang tidak tercantum di portal umum, Anda dapat mengunjungi langsung situs resmi sekolah di <a href='https://smpn2sda.sch.id/' target='_blank'>smpn2sda.sch.id</a> atau menghubungi nomor (031) 8941132.");
-                    }
-                }, 1000);
-            });
+            } catch (error) {
+                document.getElementById('typingIndicator').remove();
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'chat-msg bot';
+                errorDiv.textContent = "Maaf, terjadi kesalahan koneksi ke server AI.";
+                chatBody.appendChild(errorDiv);
+            }
         }
     </script>
 </body>
