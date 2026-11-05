@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Website Resmi SMP Negeri 2 Sidoarjo (SPENDASI). We Are Brilliant! Bright, Religious, Intelligent, Literate, Lawful, Integrity.">
+    <meta name="author" content="SMP Negeri 2 Sidoarjo">
+    <title>SMP Negeri 2 Sidoarjo - SPENDASI We Are Brilliant!</title>
+    
+    <!-- Google Fonts & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==========================================
+           1. CSS VARIABLES & BASE STYLES
+           ========================================== */
+        :root {
+            --primary-navy: #0A2540;
+            --primary-blue: #1E3A8A;
+            --accent-gold: #D4AF37;
+            --accent-gold-hover: #AA8C2C;
+            --support-blue: #3B82F6;
+            --light-blue: #EFF6FF;
+            --bg-body: #F8FAFC;
+            --bg-card: #FFFFFF;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
+            --border-color: #E2E8F0;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.3);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --primary-navy: #020617;
+            --primary-blue: #0F172A;
+            --bg-body: #090D16;
+            --bg-card: #1E293B;
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+            --border-color: #334155;
+            --light-blue: #1E293B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-body); }
+        ::-webkit-scrollbar-thumb { background: var(--support-blue); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary-blue); }
+
+        /* General Utility Classes */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .section-padding { padding: 80px 0; }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header .tag {
+            display: inline-block;
+            background: var(--light-blue);
+            color: var(--support-blue);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--text-main);
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-hover));
+            color: #000;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #FFF;
+            border: 2px solid rgba(255,255,255,0.4);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: #FFF;
+        }
+
+        /* ==========================================
+           2. LOADING SCREEN
+           ========================================== */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: var(--primary-navy);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255,255,255,0.1);
+            border-top: 5px solid var(--accent-gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* ==========================================
+           3. TOP BAR & NAVBAR
+           ========================================== */
+        .top-bar {
+            background: var(--primary-navy);
+            color: rgba(255,255,255,0.8);
+            font-size: 0.85rem;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-info span { margin-right: 20px; }
+        .top-info i { color: var(--accent-gold); margin-right: 6px; }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        [data-theme="dark"] .navbar {
+            background: rgba(15, 23, 42, 0.85);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 45px;
+            height: 45px;
+            background: var(--primary-blue);
+            color: var(--accent-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            border: 2px solid var(--accent-gold);
+        }
+
+        .logo-text h1 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--primary-navy);
+            line-height: 1.2;
+        }
+
+        [data-theme="dark"] .logo-text h1 { color: #FFF; }
+
+        .logo-text span {
+            font-size: 0.75rem;
+            color: var(--accent-gold);
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover { color: var(--support-blue); }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gold);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text-main);
+        }
+
+        /* ==========================================
+           4. HERO SECTION
+           ========================================== */
+        .hero {
+            position: relative;
+            min-height: 85vh;
+            background: linear-gradient(rgba(10, 37, 64, 0.75), rgba(10, 37, 64, 0.85)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            color: #FFF;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .badge-hero {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 35px;
+            font-weight: 400;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        /* ==========================================
+           5. PROFIL SEKOLAH & BRILLIANT
+           ========================================== */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .profile-img-wrap {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .profile-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .brilliant-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .brilliant-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .brilliant-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gold);
+            box-shadow: var(--shadow-md);
+        }
+
+        .brilliant-card .letter {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent-gold);
+        }
+
+        .brilliant-card .word {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: block;
+        }
+
+        .brilliant-card .desc {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================
+           6. STATISTIK SEKOLAH
+           ========================================== */
+        .stats-section {
+            background: linear-gradient(135deg, var(--primary-navy), var(--primary-blue));
+            color: #FFF;
+            position: relative;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px 20px;
+            border-radius: var(--radius-lg);
+            backdrop-filter: blur(5px);
+        }
+
+        .stat-card i {
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+        }
+
+        .stat-card .number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .stat-card .label {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* ==========================================
+           7. GURU & FASILITAS & CARDS
+           ========================================== */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .card-body { padding: 20px; }
+
+        .search-box {
+            max-width: 400px;
+            margin: 0 auto 40px auto;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            color: var(--text-main);
+            outline: none;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        /* ==========================================
+           8. GALERI LIGHTBOX
+           ========================================== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            height: 220px;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover img { transform: scale(1.1); }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(10, 37, 64, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+            color: #FFF;
+            font-size: 1.5rem;
+        }
+
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+        /* Lightbox Modal */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: var(--radius-md);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            color: #FFF;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        /* ==========================================
+           9. KONTAK & FOOTER
+           ========================================== */
+        .contact-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .map-frame {
+            width: 100%;
+            height: 100%;
+            min-height: 350px;
+            border-radius: var(--radius-md);
+            border: none;
+        }
+
+        footer {
+            background: var(--primary-navy);
+            color: rgba(255,255,255,0.7);
+            padding: 50px 0 20px 0;
+            font-size: 0.9rem;
+        }
+
+        footer h4 { color: #FFF; margin-bottom: 20px; font-weight: 700; }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            text-align: center;
+        }
+
+        /* ==========================================
+           10. AI CHATBOT SPENDASI
+           ========================================== */
+        .chat-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--support-blue), var(--primary-blue));
+            color: #FFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-glow);
+            z-index: 1500;
+            transition: var(--transition);
+        }
+
+        .chat-toggle:hover { transform: scale(1.1); }
+
+        .chat-window {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 380px;
+            height: 520px;
+            max-width: calc(100vw - 40px);
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            z-index: 1500;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chat-header {
+            background: var(--primary-navy);
+            color: #FFF;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-header-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-header-info i { color: var(--accent-gold); }
+
+        .chat-body {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background: var(--bg-body);
+        }
+
+        .chat-msg {
+            max-width: 80%;
+            padding: 10px 14px;
+            border-radius: 15px;
+            font-size: 0.88rem;
+            line-height: 1.4;
+        }
+
+        .chat-msg.bot {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            align-self: flex-start;
+            border-bottom-left-radius: 2px;
+        }
+
+        .chat-msg.user {
+            background: var(--support-blue);
+            color: #FFF;
+            align-self: flex-end;
+            border-bottom-right-radius: 2px;
+        }
+
+        .chat-footer {
+            padding: 12px;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            gap: 8px;
+        }
+
+        .chat-footer input {
+            flex: 1;
+            padding: 10px 14px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-body);
+            color: var(--text-main);
+            outline: none;
+        }
+
+        .chat-footer button {
+            background: var(--support-blue);
+            color: #FFF;
+            border: none;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 45px;
+            height: 45px;
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .back-to-top.show { opacity: 1; visibility: visible; }
+
+        /* ==========================================
+           11. RESPONSIVE DESIGN
+           ========================================== */
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--bg-card);
+                flex-direction: column;
+                padding: 20px;
+                gap: 15px;
+                border-bottom: 1px solid var(--border-color);
+                display: none;
+            }
+            .nav-links.active { display: flex; }
+            .hero h1 { font-size: 2.2rem; }
+            .grid-2, .contact-wrap { grid-template-columns: 1fr; }
+            .top-bar { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LOADING SCREEN -->
+    <div id="loader">
+        <div class="spinner"></div>
+        <h3 style="color:#FFF; font-weight:700;">SPENDASI SIDOARJO</h3>
+        <p style="color:var(--accent-gold); font-size:0.9rem;">We Are Brilliant!</p>
+    </div>
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-info">
+                <span><i class="fas fa-map-marker-alt"></i> Jl. Raya Ponti, Magersari, Sidoarjo</span>
+                <span><i class="fas fa-phone"></i> (031) 8941132</span>
+                <span><i class="fas fa-envelope"></i> sdasmpn2@gmail.com</span>
+            </div>
+            <div>
+                <span id="digital-clock"><i class="fas fa-clock"></i> --:--:-- WIB</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">
+                <div class="logo-img">S2</div>
+                <div class="logo-text">
+                    <h1>SMPN 2 SIDOARJO</h1>
+                    <span>SPENDASI</span>
+                </div>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#beranda">Beranda</a></li>
+                <li><a href="#profil">Profil</a></li>
+                <li><a href="#guru">Guru & Staf</a></li>
+                <li><a href="#fasilitas">Fasilitas</a></li>
+                <li><a href="#prestasi">Prestasi</a></li>
+                <li><a href="#berita">Berita</a></li>
+                <li><a href="#galeri">Galeri</a></li>
+                <li><a href="#kontak">Kontak</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" title="Ubah Mode Tampilan"><i class="fas fa-moon"></i></button>
+                <button class="btn btn-primary" onclick="toggleChat()" style="padding: 8px 18px; font-size:0.85rem;"><i class="fas fa-robot"></i> Tanya AI</button>
+                <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="beranda" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="badge-hero"><i class="fas fa-graduation-cap"></i> AKREDITASI A (NPSN: 20501727)</span>
+                <h1>SELAMAT DATANG DI SMP NEGERI 2 SIDOARJO</h1>
+                <p>Mewujudkan Generasi Berkarakter, Unggul, Berwawasan Global, dan Berbudaya Lingkungan.</p>
+                <div class="hero-btns">
+                    <a href="#profil" class="btn btn-primary">Jelajahi Sekolah <i class="fas fa-arrow-right"></i></a>
+                    <a href="#kontak" class="btn btn-outline">Kenali SPENDASI</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROFIL SEKOLAH & BRILLIANT -->
+    <section id="profil" class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="tag">Profil Sekolah</span>
+                <h2>Mengenal Lebih Dekat SPENDASI</h2>
+                <p>SMP Negeri 2 Sidoarjo merupakan lembaga pendidikan unggulan di Kabupaten Sidoarjo yang berkomitmen mencetak generasi berkualitas.</p>
+            </div>
+            
+            <div class="grid-2">
+                <div class="profile-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=800&auto=format&fit=crop" alt="Lingkungan SMPN 2 Sidoarjo">
+                </div>
+                <div>
+                    <h3 style="font-size:1.8rem; margin-bottom:15px; font-weight:700;">Sambutan Kepala Sekolah</h3>
+                    <blockquote style="border-left:4px solid var(--accent-gold); padding-left:15px; margin-bottom:20px; font-style:italic; color:var(--text-muted);">
+                        "Selamat datang di website resmi SMP Negeri 2 Sidoarjo. Kami terus berinovasi untuk memberikan pelayanan pendidikan terbaik berlandaskan nilai-nilai BRILLIANT."
+                    </blockquote>
+                    <p style="font-weight:700; color:var(--text-main);">Sukardi, S.Pd., M.Pd.</p>
+                    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:25px;">Kepala SMP Negeri 2 Sidoarjo</p>
+                    
+                    <h4 style="margin-bottom:10px;">Visi Sekolah</h4>
+                    <p style="color:var(--text-muted); font-size:0.95rem;">Terwujudnya Lulusan yang Berkarakter, Unggul dalam Prestasi, Berwawasan Global, dan Berbudaya Lingkungan.</p>
+                </div>
+            </div>
+
+            <!-- SLOGAN BRILLIANT -->
+            <div style="margin-top: 60px;">
+                <h3 style="text-align:center; margin-bottom:10px;">Slogan Sekolah: <span style="color:var(--accent-gold);">"We Are Brilliant!"</span></h3>
+                <div class="brilliant-grid">
+                    <div class="brilliant-card"><span class="letter">B</span><span class="word">Bright</span><span class="desc">Cerdas</span></div>
+                    <div class="brilliant-card"><span class="letter">R</span><span class="word">Religious</span><span class="desc">Agamis</span></div>
+                    <div class="brilliant-card"><span class="letter">I</span><span class="word">Intelligent</span><span class="desc">Berbakat</span></div>
+                    <div class="brilliant-card"><span class="letter">L</span><span class="word">Literate</span><span class="desc">Terpelajar</span></div>
+                    <div class="brilliant-card"><span class="letter">L</span><span class="word">Lawful</span><span class="desc">Patuh</span></div>
+                    <div class="brilliant-card"><span class="letter">I</span><span class="word">Integrity</span><span class="desc">Integritas</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATISTIK SEKOLAH -->
+    <section class="section-padding stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-user-graduate"></i>
+                    <span class="number" data-target="960">0</span>
+                    <span class="label">Siswa Aktif</span>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <span class="number" data-target="54">0</span>
+                    <span class="label">Guru & Staf</span>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-door-open"></i>
+                    <span class="number" data-target="30">0</span>
+                    <span class="label">Rombongan Belajar</span>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-award"></i>
+                    <span class="number" data-target="120">0</span>
+                    <span class="label">Prestasi Diraih</span>
+                </div>
+            </div>
+            <p style="text-align:center; font-size:0.8rem; margin-top:30px; opacity:0.7;">* Data diperbarui berdasarkan statistik TA 2025/2026</p>
+        </div>
+    </section>
+
+    <!-- GURU DAN STAF -->
+    <section id="guru" class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="tag">Tenaga Pendidik</span>
+                <h2>Guru & Tenaga Kependidikan</h2>
+                <p>Pengajar profesional dan berpengalaman yang siap membimbing siswa mencapai potensi terbaiknya.</p>
+            </div>
+
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchGuru" placeholder="Cari nama guru atau mata pelajaran..." onkeyup="filterGuru()">
+            </div>
+
+            <div class="cards-grid" id="guruGrid">
+                <div class="card guru-card">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop" class="card-img" alt="Guru">
+                    <div class="card-body">
+                        <h4 style="font-size:1.1rem;">Sukardi, S.Pd., M.Pd.</h4>
+                        <p style="color:var(--accent-gold); font-weight:600; font-size:0.85rem;">Kepala Sekolah</p>
+                        <p style="color:var(--text-muted); font-size:0.85rem; margin-top:5px;">Manajemen Pendidikan</p>
+                    </div>
+                </div>
+                <div class="card guru-card">
+                    <img src="https://images.unsplash.com/photo-1580894732413-a70d91d13262?q=80&w=400&auto=format&fit=crop" class="card-img" alt="Guru">
+                    <div class="card-body">
+                        <h4 style="font-size:1.1rem;">Tim Guru IPA SPENDASI</h4>
+                        <p style="color:var(--support-blue); font-weight:600; font-size:0.85rem;">Guru Ilmu Pengetahuan Alam</p>
+                        <p style="color:var(--text-muted); font-size:0.85rem; margin-top:5px;">Pengajar Pembelajaran Berbasis Riset</p>
+                    </div>
+                </div>
+                <div class="card guru-card">
+                    <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=400&auto=format&fit=crop" class="card-img" alt="Guru">
+                    <div class="card-body">
+                        <h4 style="font-size:1.1rem;">Tim Guru Matematika</h4>
+                        <p style="color:var(--support-blue); font-weight:600; font-size:0.85rem;">Guru Matematika</p>
+                        <p style="color:var(--text-muted); font-size:0.85rem; margin-top:5px;">Pengembang Logika dan Olimpiade</p>
+                    </div>
+                </div>
+                <div class="card guru-card">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" class="card-img" alt="Guru">
+                    <div class="card-body">
+                        <h4 style="font-size:1.1rem;">Tim Guru Bahasa Inggris</h4>
+                        <p style="color:var(--support-blue); font-weight:600; font-size:0.85rem;">Guru Bahasa Inggris</p>
+                        <p style="color:var(--text-muted); font-size:0.85rem; margin-top:5px;">Program Berwawasan Global</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FASILITAS SEKOLAH -->
+    <section id="fasilitas" class="section-padding" style="background:var(--light-blue);">
+        <div class="container">
+            <div class="section-header">
+                <span class="tag">Sarana & Prasarana</span>
+                <h2>Fasilitas Modern SPENDASI</h2>
+                <p>Menyediakan lingkungan belajar yang aman, nyaman, dan mendukung perkembangan potensi siswa secara maksimal.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=600&auto=format&fit=crop" class="card-img" alt="Perpustakaan">
+                    <div class="card-body">
+                        <h4>Perpustakaan Digital</h4>
+                        <p style="color:var(--text-muted); font-size:0.9rem; margin-top:8px;">Koleksi buku fisik dan digital terlengkap dengan ruang baca ber-AC yang nyaman.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=600&auto=format&fit=crop" class="card-img" alt="Laboratorium Komputer">
+                    <div class="card-body">
+                        <h4>Laboratorium Komputer</h4>
+                        <p style="color:var(--text-muted); font-size:0.9rem; margin-top:8px;">Dilengkapi komputer spesifikasi tinggi dan akses internet cepat untuk pembelajaran multimedia.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=600&auto=format&fit=crop" class="card-img" alt="Laboratorium IPA">
+                    <div class="card-body">
+                        <h4>Laboratorium IPA</h4>
+                        <p style="color:var(--text-muted); font-size:0.9rem; margin-top:8px;">Peralatan sains modern untuk praktikum Fisika, Biologi, dan Kimia dasar.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=600&auto=format&fit=crop" class="card-img" alt="Lapangan Olahraga">
+                    <div class="card-body">
+                        <h4>Lapangan Olahraga</h4>
+                        <p style="color:var(--text-muted); font-size:0.9rem; margin-top:8px;">Lapangan serbaguna untuk Basket, Futsal, Voli, dan kegiatan upacara.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRESTASI SEKOLAH -->
+    <section id="prestasi" class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="tag">Kebanggaan Sekolah</span>
+                <h2>Prestasi Terbaru SPENDASI</h2>
+                <p>Capaian membanggakan siswa-siswi SMPN 2 Sidoarjo di tingkat Kabupaten, Provinsi, hingga Nasional.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-body">
+                        <span style="background:rgba(212, 175, 55, 0.2); color:var(--accent-gold); padding:4px 12px; border-radius:12px; font-size:0.75rem; font-weight:700;">AKADEMIK</span>
+                        <h4 style="margin-top:12px;">Juara 1 Olimpiade Sains Nasional (OSN) tingkat Kabupaten</h4>
+                        <p style="color:var(--text-muted); font-size:0.85rem; margin-top:8px;">Meraih Medali Emas dalam bidang Studi IPA dan Matematika.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span style="background:rgba(59, 130, 246, 0.2); color:var(--support-blue); padding:4px 12px; border-radius:12px; font-size:0.75rem; font-weight:700;">NON-AKADEMIK</span>
+                        <h4 style="margin-top:12px;">Juara Utama Lomba LKBB & Paskibra Jawa Timur</h4>
+                        <p style="color:var(--text-muted); font-size:0.85rem; margin-top:8px;">Tim Paskibra SPENDASI berhasil menyabet piala bergilir tingkat Jawa Timur.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <span style="background:rgba(34, 197, 94, 0.2); color:#22c55e; padding:4px 12px; border-radius:12px; font-size:0.75rem; font-weight:700;">ADIWIYATA</span>
+                        <h4 style="margin-top:12px;">Penghargaan Sekolah Adiwiyata Mandiri</h4>
+                        <p style="color:var(--text-muted); font-size:0.85rem; margin-top:8px;">Komitmen nyata seluruh warga sekolah dalam menjaga pelestarian lingkungan.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BERITA TERBARU -->
+    <section id="berita" class="section-padding" style="background:var(--light-blue);">
+        <div class="container">
+            <div class="section-header">
+                <span class="tag">Informasi Terkini</span>
+                <h2>Berita & Artikel Sekolah</h2>
+                <p>Ikuti perkembangan terbaru kegiatan dan pengumuman dari SMPN 2 Sidoarjo.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=600&auto=format&fit=crop" class="card-img" alt="Berita">
+                    <div class="card-body">
+                        <span style="font-size:0.75rem; color:var(--text-muted);"><i class="fas fa-calendar"></i> 25 Oktober 2025</span>
+                        <h4 style="margin:8px 0;">Kegiatan Peringatan Hari Pendidikan dan Gelar Karya P5</h4>
+                        <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:15px;">Siswa-siswi menayangkan karya kreasi berbasis lingkungan dan kebudayaan daerah.</p>
+                        <a href="https://smpn2sda.sch.id/" target="_blank" style="color:var(--support-blue); text-decoration:none; font-weight:600; font-size:0.85rem;">Baca Selengkapnya <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=600&auto=format&fit=crop" class="card-img" alt="Berita">
+                    <div class="card-body">
+                        <span style="font-size:0.75rem; color:var(--text-muted);"><i class="fas fa-calendar"></i> 10 November 2025</span>
+                        <h4 style="margin:8px 0;">Pelaksanaan Asesmen Nasional Berbasis Komputer (ANBK)</h4>
+                        <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:15px;">Kegiatan ANBK di laboratorium komputer sekolah berlangsung tertib dan lancar.</p>
+                        <a href="https://smpn2sda.sch.id/" target="_blank" style="color:var(--support-blue); text-decoration:none; font-weight:600; font-size:0.85rem;">Baca Selengkapnya <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align:center; margin-top:30px;">
+                <a href="https://smpn2sda.sch.id/" target="_blank" class="btn btn-primary">Kunjungi Website Resmi Sekolah</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERI SEKOLAH -->
+    <section id="galeri" class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="tag">Dokumentasi</span>
+                <h2>Galeri Kegiatan SPENDASI</h2>
+                <p>Momen-momen berharga dalam berbagai kegiatan akademik dan ekstrakurikuler.</p>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800&auto=format&fit=crop')">
+                    <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=400&auto=format&fit=crop" alt="Kegiatan Belajar">
+                    <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=800&auto=format&fit=crop')">
+                    <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=400&auto=format&fit=crop" alt="Upacara">
+                    <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?q=80&w=800&auto=format&fit=crop')">
+                    <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?q=80&w=400&auto=format&fit=crop" alt="Ekstrakurikuler">
+                    <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=800&auto=format&fit=crop')">
+                    <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=400&auto=format&fit=crop" alt="Olahraga">
+                    <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIGHTBOX MODAL -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img id="lightboxImg" src="" alt="Galeri Full View">
+    </div>
+
+    <!-- LOKASI DAN KONTAK -->
+    <section id="kontak" class="section-padding" style="background:var(--light-blue);">
+        <div class="container">
+            <div class="section-header">
+                <span class="tag">Hubungi Kami</span>
+                <h2>Lokasi & Kontak Sekolah</h2>
+                <p>Silakan hubungi kami atau kunjungi kampus SMP Negeri 2 Sidoarjo.</p>
+            </div>
+
+            <div class="contact-wrap">
+                <div style="background:var(--bg-card); padding:30px; border-radius:var(--radius-md); border:1px solid var(--border-color);">
+                    <h3 style="margin-bottom:20px;">Informasi Kontak</h3>
+                    <p style="margin-bottom:15px;"><i class="fas fa-map-marker-alt" style="color:var(--accent-gold); width:25px;"></i> Jl. Raya Ponti, Magersari, Kec. Sidoarjo, Kab. Sidoarjo, Jawa Timur</p>
+                    <p style="margin-bottom:15px;"><i class="fas fa-phone" style="color:var(--accent-gold); width:25px;"></i> (031) 8941132</p>
+                    <p style="margin-bottom:15px;"><i class="fas fa-envelope" style="color:var(--accent-gold); width:25px;"></i> sdasmpn2@gmail.com</p>
+                    <p style="margin-bottom:25px;"><i class="fas fa-globe" style="color:var(--accent-gold); width:25px;"></i> https://smpn2sda.sch.id/</p>
+                    
+                    <a href="https://maps.google.com/?q=SMP+Negeri+2+Sidoarjo" target="_blank" class="btn btn-primary"><i class="fas fa-directions"></i> Buka Google Maps</a>
+                </div>
+
+                <div>
+                    <!-- Google Maps Embed -->
+                    <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.2735773199856!2d112.7063!3d-7.4462!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7e15e8b0d2387%3A0x6b63799cf5f764a7!2sSMP%20Negeri%202%20Sidoarjo!5e0!3m2!1sid!2sid!4v1700000000000" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4 style="color:var(--accent-gold);">SMPN 2 SIDOARJO</h4>
+                    <p>Mewujudkan Generasi Berkarakter, Unggul, Berwawasan Global, dan Berbudaya Lingkungan.</p>
+                </div>
+                <div>
+                    <h4>Navigasi Cepat</h4>
+                    <p><a href="#profil" style="color:inherit; text-decoration:none;">Profil Sekolah</a></p>
+                    <p><a href="#guru" style="color:inherit; text-decoration:none;">Guru & Staf</a></p>
+                    <p><a href="#fasilitas" style="color:inherit; text-decoration:none;">Fasilitas</a></p>
+                    <p><a href="#prestasi" style="color:inherit; text-decoration:none;">Prestasi</a></p>
+                </div>
+                <div>
+                    <h4>Tautan Resmi</h4>
+                    <p><a href="https://smpn2sda.sch.id/" target="_blank" style="color:inherit; text-decoration:none;">Website Utama SMPN 2 Sidoarjo</a></p>
+                    <p><a href="https://sekolah.data.kemendikdasmen.go.id/" target="_blank" style="color:inherit; text-decoration:none;">Data Kemendikdasmen</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SMP Negeri 2 Sidoarjo (SPENDASI). All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AI CHATBOT SPENDASI -->
+    <div class="chat-toggle" onclick="toggleChat()" title="SPENDASI AI Assistant">
+        <i class="fas fa-robot"></i>
+    </div>
+
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <div class="chat-header-info">
+                <i class="fas fa-robot"></i>
+                <div>
+                    <h4 style="font-size:0.95rem; line-height:1;">SPENDASI AI</h4>
+                    <span style="font-size:0.7rem; color:var(--accent-gold);">Asisten Virtual Resmi</span>
+                </div>
+            </div>
+            <div>
+                <button onclick="clearChat()" style="background:none; border:none; color:#FFF; cursor:pointer; margin-right:10px;" title="Hapus Chat"><i class="fas fa-trash-alt"></i></button>
+                <button onclick="toggleChat()" style="background:none; border:none; color:#FFF; cursor:pointer;" title="Tutup"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <div class="chat-msg bot">
+                Halo! Saya <strong>SPENDASI AI ASSISTANT</strong>. Ada yang bisa saya bantu terkait informasi SMP Negeri 2 Sidoarjo?
+            </div>
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="chatInput" placeholder="Tanyakan sesuatu..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <!-- TOMBOL BACK TO TOP -->
+    <div class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- ==========================================
+       12. JAVASCRIPT IMPLEMENTATION
+       ========================================== -->
+    <script>
+        // 1. Loading Screen
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            loader.style.opacity = '0';
+            setTimeout(() => { loader.style.display = 'none'; }, 500);
+        });
+
+        // 2. Jam Digital Automatic
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('digital-clock').innerHTML = `<i class="fas fa-clock"></i> ${hours}:${minutes}:${seconds} WIB`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // 3. Theme Toggle (Dark Mode / Light Mode)
+        const themeToggleBtn = document.getElementById('themeToggle');
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        });
+
+        // 4. Mobile Navigation Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // 5. Back to Top Button Logic
+        const backToTopBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 6. Search Guru
+        function filterGuru() {
+            const input = document.getElementById('searchGuru').value.toLowerCase();
+            const cards = document.getElementsByClassName('guru-card');
+            Array.from(cards).forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(input)) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        // 7. Lightbox Functionality
+        function openLightbox(src) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            lightboxImg.src = src;
+            lightbox.style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+
+        // 8. Count-Up Animation Statistics
+        let animatedStats = false;
+        window.addEventListener('scroll', () => {
+            const statsSection = document.querySelector('.stats-section');
+            const position = statsSection.getBoundingClientRect();
+            
+            if(position.top < window.innerHeight && !animatedStats) {
+                animatedStats = true;
+                const counters = document.querySelectorAll('.number');
+                counters.forEach(counter => {
+                    const target = +counter.getAttribute('data-target');
+                    let count = 0;
+                    const speed = target / 50;
+                    
+                    const updateCount = () => {
+                        count += speed;
+                        if(count < target) {
+                            counter.innerText = Math.ceil(count);
+                            setTimeout(updateCount, 30);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+                    updateCount();
+                });
+            }
+        });
+
+        // 9. AI Chatbot SPENDASI Integration Logic
+        function toggleChat() {
+            const chatWin = document.getElementById('chatWindow');
+            chatWin.style.display = (chatWin.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        function clearChat() {
+            const chatBody = document.getElementById('chatBody');
+            chatBody.innerHTML = `
+                <div class="chat-msg bot">
+                    Percakapan telah dibersihkan. Halo! Ada yang bisa saya bantu mengenai SMP Negeri 2 Sidoarjo?
+                </div>
+            `;
+        }
+
+        function handleKeyPress(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        async function sendMessage() {
+            const inputField = document.getElementById('chatInput');
+            const userMsg = inputField.value.trim();
+            if (!userMsg) return;
+
+            const chatBody = document.getElementById('chatBody');
+
+            // Append User Message
+            const userDiv = document.createElement('div');
+            userDiv.className = 'chat-msg user';
+            userDiv.textContent = userMsg;
+            chatBody.appendChild(userDiv);
+
+            inputField.value = '';
+            chatBody.scrollTop = chatBody.scrollHeight;
+
+            // Append Typing Indicator
+            const botTyping = document.createElement('div');
+            botTyping.className = 'chat-msg bot';
+            botTyping.id = 'typingIndicator';
+            botTyping.innerHTML = '<i>SPENDASI AI sedang mengetik...</i>';
+            chatBody.appendChild(botTyping);
+            chatBody.scrollTop = chatBody.scrollHeight;
+
+            // Integrasi Gemini API
+            try {
+                /* 
+                   PETUNJUK INTEGRASI GEMINI API (BACKEND PROXY):
+                   Untuk keamanan API Key, panggil backend/serverless function Anda di bawah ini:
+                   
+                   const response = await fetch('/api/spendasi-chat', {
+                       method: 'POST',
+                       headers: { 'Content-Type': 'application/json' },
+                       body: JSON.stringify({ message: userMsg })
+                   });
+                   const data = await response.json();
+                   const reply = data.reply;
+                */
+
+                // Simulasi Respons Cerdas Berbasis Pengetahuan Resmi SMPN 2 Sidoarjo
+                const reply = await simulateAIResponse(userMsg);
+
+                // Hapus Typing Indicator dan Tampilkan Jawaban Real
+                document.getElementById('typingIndicator').remove();
+                const botDiv = document.createElement('div');
+                botDiv.className = 'chat-msg bot';
+                botDiv.innerHTML = reply;
+                chatBody.appendChild(botDiv);
+                chatBody.scrollTop = chatBody.scrollHeight;
+
+            } catch (error) {
+                document.getElementById('typingIndicator').remove();
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'chat-msg bot';
+                errorDiv.textContent = "Maaf, terjadi masalah koneksi ke server AI. Silakan coba lagi nanti.";
+                chatBody.appendChild(errorDiv);
+            }
+        }
+
+        // Simulasi System Instruction & Knowledge Base Asisten Virtual
+        function simulateAIResponse(query) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    const q = query.toLowerCase();
+                    if (q.includes('lokasi') || q.includes('alamat') || q.includes('di mana')) {
+                        resolve("SMP Negeri 2 Sidoarjo berlokasi di Jalan Raya Ponti, Magersari, Kecamatan Sidoarjo, Kabupaten Sidoarjo, Jawa Timur.");
+                    } else if (q.includes('kepala sekolah') || q.includes('kepsek')) {
+                        resolve("Kepala SMP Negeri 2 Sidoarjo saat ini adalah Bapak Sukardi, S.Pd., M.Pd.");
+                    } else if (q.includes('slogan') || q.includes('brilliant') || q.includes('arti')) {
+                        resolve("Slogan sekolah adalah <strong>'We Are Brilliant!'</strong>. BRILLIANT merupakan akronim dari:<br>• <strong>B</strong>right (Cerdas)<br>• <strong>R</strong>eligious (Agamis)<br>• <strong>I</strong>ntelligent (Berbakat)<br>• <strong>L</strong>iterate (Terpelajar)<br>• <strong>L</strong>awful (Patuh)<br>• <strong>I</strong>ntegritas");
+                    } else if (q.includes('kontak') || q.includes('telepon') || q.includes('email')) {
+                        resolve("Anda dapat menghubungi pihak sekolah melalui Telepon: (031) 8941132 atau Email: sdasmpn2@gmail.com.");
+                    } else if (q.includes('fasilitas')) {
+                        resolve("SMPN 2 Sidoarjo memiliki berbagai fasilitas seperti Perpustakaan Digital, Lab Komputer, Lab IPA, Lapangan Olahraga Serbaguna, dan Ruang Kelas Berbasis Teknologi.");
+                    } else if (q.includes('visi') || q.includes('misi')) {
+                        resolve("Visi SMPN 2 Sidoarjo adalah 'Terwujudnya Lulusan yang Berkarakter, Unggul dalam Prestasi, Berwawasan Global, dan Berbudaya Lingkungan'.");
+                    } else {
+                        resolve("Terima kasih atas pertanyaannya. Untuk informasi mendalam mengenai hal tersebut yang tidak tercantum di portal umum, Anda dapat mengunjungi langsung situs resmi sekolah di <a href='https://smpn2sda.sch.id/' target='_blank'>smpn2sda.sch.id</a> atau menghubungi nomor (031) 8941132.");
+                    }
+                }, 1000);
+            });
+        }
+    </script>
+</body>
+</html>
