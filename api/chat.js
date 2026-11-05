@@ -11,8 +11,8 @@ export default async function handler(req, res) {
             return res.status(200).json({ reply: 'Error: GEMINI_API_KEY belum diatur di Environment Variables Vercel.' });
         }
 
-        // Menggunakan endpoint v1beta dan model gemini-1.5-flash yang benar
-        const apiResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+        // Menggunakan model gemini-pro yang universal dan stabil
+        const apiResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
