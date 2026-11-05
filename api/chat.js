@@ -8,10 +8,11 @@ export default async function handler(req, res) {
         const apiKey = process.env.GEMINI_API_KEY;
 
         if (!apiKey) {
-            return res.status(200).json({ reply: 'Maaf, API Key Gemini belum dikonfigurasi di Vercel.' });
+            return res.status(200).json({ reply: 'Error: GEMINI_API_KEY belum diatur di Environment Variables Vercel.' });
         }
 
-        const apiResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+        // Menggunakan model gemini-1.5-flash dengan endpoint standar v1
+        const apiResponse = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -23,15 +24,19 @@ export default async function handler(req, res) {
 
         const data = await apiResponse.json();
 
+        // Jika Google API mengembalikan error, tangkap pesannya
+        if (data.error) {
+            return res.status(200).json({ reply: `Google API Error: ${data.error.message}` });
+        }
+
         if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
             const replyText = data.candidates[0].content.parts[0].text;
             return res.status(200).json({ reply: replyText });
         } else {
-            return res.status(200).json({ reply: 'Maaf, AI sedang mengalami kendala dalam memproses jawaban. Silakan coba lagi.' });
+            return res.status(200).json({ reply: 'Maaf, format respons dari server AI tidak dikenali.' });
         }
 
     } catch (error) {
-        console.error(error);
-        return res.status(200).json({ reply: 'Terjadi kesalahan koneksi ke server AI.' });
+        return res.status(200).json({ reply: `Server Error: ${error.message}` });
     }
 }
