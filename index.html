@@ -1354,63 +1354,57 @@
         }
 
         async function sendMessage() {
-            const inputField = document.getElementById('chatInput');
-            const userMsg = inputField.value.trim();
-            if (!userMsg) return;
+    const inputField = document.getElementById('chatInput');
+    const userMsg = inputField.value.trim();
+    if (!userMsg) return;
 
-            const chatBody = document.getElementById('chatBody');
+    const chatBody = document.getElementById('chatBody');
 
-            // Append User Message
-            const userDiv = document.createElement('div');
-            userDiv.className = 'chat-msg user';
-            userDiv.textContent = userMsg;
-            chatBody.appendChild(userDiv);
+    // 1. Tampilkan pesan dari pengguna
+    const userDiv = document.createElement('div');
+    userDiv.className = 'chat-msg user';
+    userDiv.textContent = userMsg;
+    chatBody.appendChild(userDiv);
+    inputField.value = '';
+    chatBody.scrollTop = chatBody.scrollHeight;
 
-            inputField.value = '';
-            chatBody.scrollTop = chatBody.scrollHeight;
+    // 2. Tampilkan indikator loading (sedang mengetik)
+    const botTyping = document.createElement('div');
+    botTyping.className = 'chat-msg bot';
+    botTyping.id = 'typingIndicator';
+    botTyping.innerHTML = '<i>SPENDASI AI sedang mengetik...</i>';
+    chatBody.appendChild(botTyping);
+    chatBody.scrollTop = chatBody.scrollHeight;
 
-            // Append Typing Indicator
-            const botTyping = document.createElement('div');
-            botTyping.className = 'chat-msg bot';
-            botTyping.id = 'typingIndicator';
-            botTyping.innerHTML = '<i>SPENDASI AI sedang mengetik...</i>';
-            chatBody.appendChild(botTyping);
-            chatBody.scrollTop = chatBody.scrollHeight;
+    try {
+        // 3. Panggil Serverless Function Vercel yang sudah terkoneksi dengan Gemini API
+        const response = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: userMsg })
+        });
+        
+        const data = await response.json();
+        
+        // 4. Hapus indikator loading
+        document.getElementById('typingIndicator').remove();
+        
+        // 5. Tampilkan jawaban nyata dari Gemini AI
+        const botDiv = document.createElement('div');
+        botDiv.className = 'chat-msg bot';
+        botDiv.innerHTML = data.reply;
+        chatBody.appendChild(botDiv);
+        chatBody.scrollTop = chatBody.scrollHeight;
 
-            // Integrasi Gemini API
-            try {
-                /* 
-                   PETUNJUK INTEGRASI GEMINI API (BACKEND PROXY):
-                   Untuk keamanan API Key, panggil backend/serverless function Anda di bawah ini:
-                   
-                   const response = await fetch('/api/spendasi-chat', {
-                       method: 'POST',
-                       headers: { 'Content-Type': 'application/json' },
-                       body: JSON.stringify({ message: userMsg })
-                   });
-                   const data = await response.json();
-                   const reply = data.reply;
-                */
+    } catch (error) {
+        document.getElementById('typingIndicator').remove();
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'chat-msg bot';
+        errorDiv.textContent = "Maaf, terjadi kesalahan koneksi ke server AI.";
+        chatBody.appendChild(errorDiv);
+    }
+}
 
-                // Simulasi Respons Cerdas Berbasis Pengetahuan Resmi SMPN 2 Sidoarjo
-                const reply = await simulateAIResponse(userMsg);
-
-                // Hapus Typing Indicator dan Tampilkan Jawaban Real
-                document.getElementById('typingIndicator').remove();
-                const botDiv = document.createElement('div');
-                botDiv.className = 'chat-msg bot';
-                botDiv.innerHTML = reply;
-                chatBody.appendChild(botDiv);
-                chatBody.scrollTop = chatBody.scrollHeight;
-
-            } catch (error) {
-                document.getElementById('typingIndicator').remove();
-                const errorDiv = document.createElement('div');
-                errorDiv.className = 'chat-msg bot';
-                errorDiv.textContent = "Maaf, terjadi masalah koneksi ke server AI. Silakan coba lagi nanti.";
-                chatBody.appendChild(errorDiv);
-            }
-        }
 
         // Simulasi System Instruction & Knowledge Base Asisten Virtual
         function simulateAIResponse(query) {
